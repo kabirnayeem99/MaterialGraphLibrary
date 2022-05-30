@@ -1,19 +1,16 @@
 package io.github.kabirnayeem99.materialgraphlibrary
 
+/* It's a  */
 /**
- * Created by Aaron on 19/10/2014.
+ * Data class that holding the stack values and the stack color
+ *
+ * @property stackValue Int
+ * @property stackColor Int
  */
-class BarStackSegment(`val`: Int, color: Int) : Cloneable {
-    var Value: Float
-    var Color: Int
+class BarStackSegment(var stackValue: Int, val stackColor: Int) : Cloneable {
 
     @Throws(CloneNotSupportedException::class)
     public override fun clone(): Any {
         return super.clone()
-    }
-
-    init {
-        Value = `val`.toFloat()
-        Color = color
     }
 }

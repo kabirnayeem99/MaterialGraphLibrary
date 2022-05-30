@@ -3,39 +3,37 @@ package io.github.kabirnayeem99.materialgraphlibrary
 import android.graphics.Path
 import android.graphics.Region
 
-
-/*
- * 	   Created by Daniel Nadeau
- * 	   daniel.nadeau01@gmail.com
- * 	   danielnadeau.blogspot.com
+/**
+ * Data class that contains a bunch of properties that are used to draw a bar on the chart.
  *
- * 	   Licensed to the Apache Software Foundation (ASF) under one
-       or more contributor license agreements.  See the NOTICE file
-       distributed with this work for additional information
-       regarding copyright ownership.  The ASF licenses this file
-       to you under the Apache License, Version 2.0 (the
-       "License"); you may not use this file except in compliance
-       with the License.  You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-       Unless required by applicable law or agreed to in writing,
-       software distributed under the License is distributed on an
-       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-       KIND, either express or implied.  See the License for the
-       specific language governing permissions and limitations
-       under the License.
+ * It is used to store the data for a single bar on the chart
+ *
+ * @property {Int} color - The color of the bar.
+ * @property {String} name - The name of the bar.
+ * @property {Float} value - The value of the bar.
+ * @property {Path} path - The path of the bar.
+ * @property {Region} region - This is the region of the bar. It is used to determine if the bar is
+ * clicked.
+ * @property {Boolean} stackedBar - This is a boolean value that indicates whether the bar is a stacked
+ * bar or not.
+ * @property {ArrayList<BarStackSegment>} segments - This is an array list of BarStackSegment objects.
  */
-class Bar {
-    var color = 0
-    var name: String? = null
-    var value = 0f
-    var path: Path? = null
-    var region: Region? = null
-    var stackedBar = false
-    private val segments: ArrayList<BarStackSegment> = ArrayList<BarStackSegment>()
+data class Bar(
+    var color: Int = 0,
+    var name: String = "",
+    var value: Float = 0f,
+    var path: Path = Path(),
+    var region: Region = Region(),
+    var stackedBar: Boolean = false,
+    private val segments: ArrayList<BarStackSegment> = ArrayList()
+) {
 
-    fun AddStackValue(segment: BarStackSegment) {
+    /**
+     * Adds a new segment to the stack
+     *
+     * @param segment BarStackSegment - The segment to add to the stack.
+     */
+    fun addStack(segment: BarStackSegment) {
         segments.add(segment)
     }
 

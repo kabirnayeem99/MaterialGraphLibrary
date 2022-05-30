@@ -1,18 +1,11 @@
 package io.github.kabirnayeem99.materialgraphlibrary
 
 
-class Line {
-    private var points: ArrayList<LinePoint> = ArrayList<LinePoint>()
-    var color = 0
-    var isShowingPoints = true
-
-    fun getPoints(): ArrayList<LinePoint> {
-        return points
-    }
-
-    fun setPoints(points: ArrayList<LinePoint>) {
-        this.points = points
-    }
+data class Line(
+     var points: ArrayList<LinePoint> = ArrayList(),
+    var color: Int = 0,
+    var isShowingPoints: Boolean = true,
+) {
 
     fun addPoint(point: LinePoint) {
         points.add(point)
@@ -25,3 +18,5 @@ class Line {
     val size: Int
         get() = points.size
 }
+
+

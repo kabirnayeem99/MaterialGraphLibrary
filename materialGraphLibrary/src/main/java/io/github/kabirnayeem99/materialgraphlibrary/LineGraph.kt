@@ -17,7 +17,7 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
         get() {
             var max: Float = lines[0].getPoint(0).x
             for (line in lines) {
-                for (point in line.getPoints()) {
+                for (point in line.points) {
                     if (point.x < max) max = point.x
                 }
             }
@@ -117,7 +117,7 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
         } else {
             maxY = lines[0].getPoint(0).y
             for (line in lines) {
-                for (point in line.getPoints()) {
+                for (point in line.points) {
                     if (point.y > maxY) {
                         maxY = point.y
                     }
@@ -127,13 +127,13 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
         }
     }
 
-    fun getMinY(): Float {
+    private fun getMinY(): Float {
         return if (isMaxYUserSet) {
             minY
         } else {
             var min: Float = lines[0].getPoint(0).y
             for (line in lines) {
-                for (point in line.getPoints()) {
+                for (point in line.points) {
                     if (point.y < min) min = point.y
                 }
             }
@@ -142,10 +142,10 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
         }
     }
 
-    fun getMaxX(): Float {
+    private fun getMaxX(): Float {
         var max: Float = lines[0].getPoint(0).x
         for (line in lines) {
-            for (point in line.getPoints()) {
+            for (point in line.points) {
                 if (point.x > max) max = point.x
             }
         }
@@ -199,7 +199,7 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
                     }
                     paint.reset()
                     paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-                    for (p in line.getPoints()) {
+                    for (p in line.points) {
                         val yPercent: Float = (p.y - minY) / (maxY - minY)
                         val xPercent: Float = (p.x - minX) / (maxX - minX)
                         if (count == 0) {
@@ -274,7 +274,7 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
                 val minX = minX
                 paint.color = line.color
                 paint.strokeWidth = 6f
-                for (p in line.getPoints()) {
+                for (p in line.points) {
                     val yPercent: Float = (p.y - minY) / (maxY - minY)
                     val xPercent: Float = (p.x - minX) / (maxX - minX)
                     if (count == 0) {
@@ -308,7 +308,7 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
                 paint.strokeWidth = 6f
                 paint.strokeCap = Paint.Cap.ROUND
                 if (line.isShowingPoints) {
-                    for (p in line.getPoints()) {
+                    for (p in line.points) {
                         val yPercent: Float = (p.y - minY) / (maxY - minY)
                         val xPercent: Float = (p.x - minX) / (maxX - minX)
                         val xPixels = sidePadding + xPercent * usableWidth
@@ -357,7 +357,7 @@ class LineGraph(context: Context?, attrs: AttributeSet? = null) :
         val r = Region()
         for (line in lines) {
             pointCount = 0
-            for (p in line.getPoints()) {
+            for (p in line.points) {
                 if (p.path != null && p.region != null) {
                     r.setPath(p.path!!, p.region!!)
                     if (r.contains(point.x, point.y) && event.action == MotionEvent.ACTION_DOWN) {
